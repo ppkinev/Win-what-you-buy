@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Win What You Buy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="description" content="Win What You Buy">
+  <meta property="og:site_name" content="Win What You Buy">
+  <meta property="og:image" content="https://arc.js.org/thumbnail.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <link rel="icon" href="https://arc.js.org/icon.png" />
+</head>
+<body>
+
+<main id="app"></main>
+
+
+<!--
+
+identity server:
+LIVE: https://wwub.auth.rewarded.club
+TEST: http://wwub.auth-test.rewarded.club
+DEV: http://wwub.auth.localhost:5001
+
+website app ids:
+LIVE: wwub_website
+TEST: wwub_website_test
+DEV: wwub_website_dev
+
+widget app ids:
+LIVE: wwub_widget
+TEST: wwub_widget_test
+DEV: wwub_widget_dev
+
+app urls:
+LIVE: https://winwhatubuy.com
+TEST: http://spr-wwub-test.azurewebsites.net
+DEV: http://localhost/spr-wwub
+
+-->
+
+
+
+
+
+<!--TEST SERVER-->
+<!--
+<script
+  src="https://static-test.rewarded.club/content/widget/widget-no-babel.min.js"
+  id="dgl-gamified-widget"
+  data-debug="true"
+  data-env="test"
+  data-key="wwub_widget_test"
+  data-redirect-uri="http://spr-wwub-test.azurewebsites.net"
+  data-foundation="wwub"
+  data-skin="wwub"
+
+  data-mediator="true"
+></script>
+-->
+
+
+<!--LOCAL TEST PRE_PROD-->
+<!--
+<script
+  src="http://127.0.0.1:8081/widget-no-babel.min.js"
+  id="dgl-gamified-widget"
+  data-debug="true"
+  data-env="test"
+  data-key="wwub_website_test"
+  data-redirect-uri="http://127.0.0.1:8080"
+  data-foundation="wwub"
+  data-skin="wwub"
+
+  data-mediator="true"
+></script>
+-->
+
+
+<!--LOCAL-->
+<script
+  src="http://127.0.0.1:8081/widget-no-babel.min.js"
+
+  defer
+
+  id="dgl-gamified-widget"
+  data-debug="true"
+  data-env="test"
+  data-key="everton_rewards_widget_test"
+  data-redirect-uri="http://127.0.0.1:8080"
+  data-foundation="everton"
+  data-skin="wwub"
+
+  data-mediator="true"
+></script>
+
+
+<!-- When adding app.js script to index page do not forget to add id="main-app" to the script -->
+<!-- It is needed if static data is stored next to JS file, rather then to HTML pages -->
+
+</body>
+</html>

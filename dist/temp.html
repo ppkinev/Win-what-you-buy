@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+  <script src="lib/win-wheel/winwheel.js"></script>
+</head>
+<body>
+<canvas width="460" height="460" id="canvas-id"></canvas>
+<button>Spin the Wheel</button>
+<script>
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  var SEGMENT_NUMBER = 6
+  var wheel = new Winwheel({
+    canvasId: 'canvas-id',
+    drawMode: 'segmentImage',
+    imageOverlay: true,
+    drawText: true,
+    numSegments: SEGMENT_NUMBER,
+    rotationAngle: -((360 / SEGMENT_NUMBER) / 2),
+//    fillStyle: 'transparent',
+    lineWidth: 10,
+    strokeStyle: 'red',
+    textAlignment: 'inner',
+    textMargin: 25,
+    textFillStyle: 'red',
+    textFontSize: 16,
+    textFontWeight: 400,
+    textFontFamily: 'Times, Arial, helvetica',
+    imagesFromOuter: true,
+    resizeSegmentImages: true,
+    segments: [
+      { text: 'Segment 1', image: './icon.png' },
+      { text: 'Segment 2', image: './icon.png' },
+      { text: 'Segment 3', image: './icon.png' },
+      { text: 'Segment 4', image: './icon.png' },
+      { text: 'Segment 5', image: './icon.png' },
+      { text: 'Segment 6', image: './icon.png' },
+    ],
+    animation: {
+      type: 'spinToStop',
+      duration: 8,
+      spins: 5,
+      callbackSound: playSound,
+      soundTrigger: 'segment', // segment
+      callbackFinished: winAnimation,
+
+      // happens during animation
+      // callbackAfter: () => console.log('callback after')
+    },
+
+    pointerAngle: 0,
+    pointerGuide: {
+      display: true,
+      strokeStyle: 'red',
+      lineWidth: 5,
+    },
+  })
+
+  //  var a = [
+  //    './icon.png',
+  //    './icon.png',
+  //    './icon.png',
+  //    './icon.png',
+  //    './icon.png',
+  //    './icon.png',
+  //  ]
+  //
+  //  a.forEach((image, index) => wheel.segments[index + 1].changeImage(image))
+
+  var tickAudio = new Audio('./lib/win-wheel/tick.mp3')  // Create audio object and load tick.mp3 file.
+  function playSound() {
+    // Stop and rewind the sound if it already happens to be playing.
+    tickAudio.pause()
+    tickAudio.currentTime = 0
+    // Play the sound.
+    tickAudio.play()
+  }
+
+  var winAudio = new Audio('./lib/win-wheel/applause.mp3')
+  function winAnimation(indicatedSegment) {
+    // Get the number of the winning segment.
+    var winningSegmentNumber = wheel.getIndicatedSegmentNumber()
+
+    // Loop and set fillStyle of all segments to gray.
+    for (var x = 1; x < wheel.segments.length; x++) {
+      wheel.segments[x].fillStyle = 'gray'
+    }
+
+    // Make the winning one yellow.
+    wheel.segments[winningSegmentNumber].fillStyle = 'gold'
+
+    // Call draw function to render changes.
+    wheel.draw()
+
+    winAudio.play()
+  }
+
+  document.querySelector('button').addEventListener('click', function () {
+    var winSegment = Math.floor(Math.random() * SEGMENT_NUMBER) + 1
+    console.log(winSegment)
+
+    var segmentWidth = 360 / SEGMENT_NUMBER
+    var winningSegmentMiddle = (segmentWidth * winSegment) - (segmentWidth / 2)
+    var stopAt = randomIntFromInterval(winningSegmentMiddle - (segmentWidth * 0.3), winningSegmentMiddle + (segmentWidth * 0.3))
+
+    wheel.animation.stopAngle = stopAt
+    wheel.startAnimation()
+  })
+
+  var resetAnimation = function () {
+    wheel.stopAnimation(false)
+    wheel.rotationAngle = 0
+    wheel.draw()
+  }
+
+</script>
+
+</body>
+</html>
