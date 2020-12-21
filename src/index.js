@@ -33,15 +33,20 @@ const renderApp = () => (
 
 const root = document.getElementById('app')
 // remove wrapping launchWhenWidgetReady method when works without widget
-launchWhenWidgetReady(() => {
-  render(renderApp(), root)
-})
+// launchWhenWidgetReady(() => {
+//   render(renderApp(), root)
+// })
+render(renderApp(), root)
 
 if (module.hot) {
-  launchWhenWidgetReady(() => {
-    module.hot.accept('components/App', () => {
-      require('components/App')
-      render(renderApp(), root)
-    })
+  module.hot.accept('components/App', () => {
+    require('components/App')
+    render(renderApp(), root)
   })
+  // launchWhenWidgetReady(() => {
+  //   module.hot.accept('components/App', () => {
+  //     require('components/App')
+  //     render(renderApp(), root)
+  //   })
+  // })
 }

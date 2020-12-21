@@ -13,6 +13,7 @@ const Wheel = ({ className }) => {
         style={{
           fontFamily: theme.fonts.main,
           paddingTop: '32px',
+          overflow: 'visible',
         }}
         className="wheelSVG"
         version="1.1"
