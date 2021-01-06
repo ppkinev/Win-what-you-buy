@@ -77,7 +77,7 @@
     "webpack-dev-server": "^2.11.2"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "history": "^4.7.2",
     "ismobilejs": "^0.4.1",
